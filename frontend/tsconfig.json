@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "lib": ["es6", "dom"],
+        "jsx": "react-jsxdev",
+        "module": "commonjs",
+        "target": "ES2018",
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "declaration": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noImplicitReturns": true,
+        "stripInternal": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": "src",
+        "paths": {
+            "common/*": ["./common/*"],
+            "components/*": ["./components/*"],
+            "pages/*": ["./pages/*"],
+            "wrappers/*": ["./wrappers/*"]
+        }
+    },
+    "include": ["src/**/*", "config/**/*"],
+    "exclude": ["node_modules"],
+    "typings": ["./config/globals.ts"]
+}
