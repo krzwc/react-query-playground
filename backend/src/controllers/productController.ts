@@ -1,13 +1,19 @@
-import Category from "../models/category";
-import Product from "../models/product";
-import { Request, Response, NextFunction } from "express";
-import { check, validationResult } from "express-validator";
+import Category from '../models/category';
+import Product from '../models/product';
+import { Request, Response, NextFunction } from 'express';
+import { check, validationResult } from 'express-validator';
 
 export default {
-  async findOneByCategory(req: Request, res: Response, next: NextFunction) {
-    const category = await Category.findOne({ slug: req.params.slug1 });
+  async findOneByCategory(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) {
+    const category = await Category.findOne({
+      slug: req.params.slug1,
+    });
     const product = await Product.findOne({
-      category: category._id,
+      category: category && category._id,
       slug: req.params.slug2,
     });
     if (!category) return next();
@@ -15,7 +21,9 @@ export default {
     return res.status(200).send({ product });
   },
   async update(req: Request, res: Response, next: NextFunction) {
-    const category = await Category.findOne({ slug: req.params.slug1 });
+    const category = await Category.findOne({
+      slug: req.params.slug1,
+    });
     const product = await Product.findOneAndUpdate(
       { slug: req.params.slug2 },
       {
@@ -23,18 +31,20 @@ export default {
         description: req.body.description,
         number: req.body.number,
         images: req.body.images,
-        category: category.id,
+        category: category && category.id,
       },
-      { new: true }
+      { new: true },
     );
     if (!product) return next();
 
-    return res.status(200).send({ product, message: "Product was updated" });
+    return res
+      .status(200)
+      .send({ product, message: 'Product was updated' });
   },
   validate: [
-    check("name").isLength({ min: 1 }),
-    check("description").isLength({ min: 1 }),
-    check("number").isLength({ min: 1 }),
+    check('name').isLength({ min: 1 }),
+    check('description').isLength({ min: 1 }),
+    check('number').isLength({ min: 1 }),
   ],
   verifyValidation(req: Request, res: Response, next: NextFunction) {
     const errors = validationResult(req);
@@ -42,6 +52,6 @@ export default {
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-    next();
+    return next();
   },
 };

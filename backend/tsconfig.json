@@ -1,5 +1,23 @@
 {
   "compilerOptions": {
-    "sourceMap": true
-  }
+    "target": "ES2018",
+    "allowJs": true,
+    "module": "commonjs",
+    "strict": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": false,
+    "outDir": "dist",
+    "declaration": true,
+    "moduleResolution": "Node",
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "stripInternal": true,
+    "types": [],
+    "baseUrl": "src",
+    "paths": {
+      "types/*": ["./types/*"]
+    }
+  },
+  "include": ["src", "types"]
 }
