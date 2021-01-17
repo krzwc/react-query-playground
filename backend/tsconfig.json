@@ -6,7 +6,7 @@
     "strict": true,
     "noImplicitAny": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": false,
+    "noEmit": true,
     "outDir": "dist",
     "declaration": true,
     "moduleResolution": "Node",
@@ -14,10 +14,9 @@
     "noImplicitReturns": true,
     "stripInternal": true,
     "types": [],
+    "typeRoots": ["./node_modules/@types", "./custom_typings"],
     "baseUrl": "src",
-    "paths": {
-      "types/*": ["./types/*"]
-    }
+    "paths": {}
   },
-  "include": ["src", "types"]
+  "include": ["src", "custom_typings"]
 }

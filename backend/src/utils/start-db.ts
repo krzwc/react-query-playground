@@ -11,6 +11,7 @@ export const startDB = (url = config.database) => {
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,
+      useUnifiedTopology: true,
     })
     .then(async () => {
       if (eraseDatabaseOnSync) {
