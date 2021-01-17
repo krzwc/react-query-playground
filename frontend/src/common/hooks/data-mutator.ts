@@ -10,7 +10,6 @@ const isUrlAFunction = (url: ModelURL): url is ((data: SingleItemData) => URL) =
 };
 
 const http = HttpService.getInstance();
-// const queryClient = useQueryClient();
 
 export function useDataMutator<T>(entityType: ENTITY_TYPES, actionType: ACTION_TYPES, entityData?: { id: string }): UseMutationResult<T, Error, T, unknown> {
     

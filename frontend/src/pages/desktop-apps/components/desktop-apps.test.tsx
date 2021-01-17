@@ -1,4 +1,4 @@
-import DesktopApps from './desktop-apps';
+/* import DesktopApps from './desktop-apps';
 import { products } from './mocks';
 import { REQUEST_STATUSES } from 'common/consts';
 
@@ -8,3 +8,4 @@ describe('DesktopApps', () => {
         expect(queryAllByRole('link')).toHaveLength(3);
     });
 });
+ */
