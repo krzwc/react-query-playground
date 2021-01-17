@@ -1,5 +1,13 @@
 import { FunctionComponent } from 'react';
 import { Empty as AntdEmpty } from 'antd';
+import styled from 'styled-components';
+import { centerMixin } from 'common/styles/css-mixins';
+
+export const EmptyWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+    ${centerMixin()};
+`;
 
 export const Empty: FunctionComponent<{
     requestFailure?: boolean;
@@ -8,8 +16,8 @@ export const Empty: FunctionComponent<{
     const failedDescription = requestFailure ? 'Request Failure' : 'No data';
     const description = customDescription || failedDescription;
     return (
-        <div className="empty-wrapper">
+        <EmptyWrapper>
             <AntdEmpty image={AntdEmpty.PRESENTED_IMAGE_SIMPLE} description={description} />
-        </div>
+        </EmptyWrapper>
     );
 };

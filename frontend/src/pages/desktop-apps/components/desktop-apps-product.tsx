@@ -1,84 +1,60 @@
-import { FunctionComponent, Fragment } from 'react';
-// import { Link } from "react-router-dom";
-import { Modal, ModalMain, ModalGrid, CloseCross, ProductImg, CrossLink } from './product-styled-components';
-import { ProductDescription } from './product-description';
+import { FunctionComponent } from 'react';
+import { Modal, ModalInside, ModalContentContainer, CloseCross, CrossLink } from './product-styled-components';
+import { ProductField } from './product-field';
 import { Loader } from 'components/loader/loader';
-import { Empty } from 'components/empty/empty';
 import { Product } from '../interfaces';
-import { QueryStatus, useMutation } from 'react-query';
-import { Input, Carousel, Form, Button } from 'antd';
-import { stripProtocolFromFDQN, isNotEmpty, stripNonNumerics, stripNumerics } from 'common/helpers';
-import groupBy from 'lodash-es/groupBy';
+import { QueryStatus, useQueryClient } from 'react-query';
+import { Input, Form, Button, notification, Space } from 'antd';
+import { stripProtocolFromFDQN } from 'common/helpers';
 import { useDataMutator } from 'common/hooks/data-mutator';
-import { ENTITY_TYPES, ACTION_TYPES } from 'common/consts';
-import { MODELS } from 'common/models';
+import { ENTITY_TYPES, ACTION_TYPES, REQUEST_STATUSES } from 'common/consts';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
-const transformValuesToSend = (values: Record<string, any>) => {
-    const keysContainingNumbers = Object.keys(values).filter((key) => stripNonNumerics(key) !== '');
-    const keysGroupedByNumber = groupBy(keysContainingNumbers, stripNonNumerics);
-    const mappedValues = Object.entries(keysGroupedByNumber)
-        .map(([_, v]) => v)
-        .map(([url, name]) => ({ [stripNumerics(url)]: 'http://' + values[url], [stripNumerics(name)]: values[name] }));
-    return mappedValues;
-};
+const transformValuesToSend = (values: Record<string, any>) => ({
+    ...values,
+    images: values.images.map((image) => ({ ...image, url: 'http://' + image.url })),
+});
 
 const DesktopAppProduct: FunctionComponent<{
     product: Product;
     status: QueryStatus;
-}> = ({
-    product = {
-        name: '',
-        number: '',
-        images: [],
-        department: '',
-        description: '',
-        slug: '',
-    } as Product,
-    status,
-}) => {
-    /* const mutation = useMutation((data) =>
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-            body: JSON.stringify(data),
-        }),
-    ); */
+}> = ({ product, status }) => {
+    const queryClient = useQueryClient();
     const mutation = useDataMutator(ENTITY_TYPES.DESKTOP_APPS_PRODUCT, ACTION_TYPES.UPDATE, {
         id: product.name,
     });
 
-    const onFinish = (values: any) => {
-        const { name, number, description } = values;
-        const valuesToSend = {
-            name,
-            number,
-            description,
-            images: transformValuesToSend(values),
-        };
-        mutation.mutate(valuesToSend);
+    const onFinish = async (values: any) => {
+        const valuesToSend = transformValuesToSend(values);
+        try {
+            await mutation.mutateAsync(valuesToSend);
+        } catch (error) {
+            notification[REQUEST_STATUSES.ERROR]({
+                message: 'Update notification',
+                description: 'Update not successful',
+            });
+        } finally {
+            notification[REQUEST_STATUSES.SUCCESS]({
+                message: 'Update notification',
+                description: 'Successfully updated',
+            });
+            queryClient.invalidateQueries(product.name);
+        }
     };
 
     const initialValues = {
         ...product,
-        ...(isNotEmpty(product.images) &&
-            product.images
-                .map(({ url, name }, index) => ({
-                    [`url${index}`]: stripProtocolFromFDQN(url),
-                    [`name${index}`]: name,
-                }))
-                .reduce((acc, cur) => Object.assign(acc, cur), {})),
+        images: product.images.map((image) => ({ ...image, url: stripProtocolFromFDQN(image.url) })),
     };
 
     return (
         <Modal>
-            <ModalMain>
-                <ModalGrid>
+            <ModalInside>
+                <ModalContentContainer>
                     <CrossLink to="/">
                         <CloseCross>&times;</CloseCross>
                     </CrossLink>
-                    {status !== 'loading' && status !== 'error' ? (
+                    {status !== REQUEST_STATUSES.LOADING && status !== REQUEST_STATUSES.ERROR ? (
                         <>
                             <Form
                                 name="product_form"
@@ -86,37 +62,50 @@ const DesktopAppProduct: FunctionComponent<{
                                 className="login-form"
                                 initialValues={initialValues}
                             >
-                                {['name', 'number', 'description'].map((field, index) => (
-                                    <ProductDescription
-                                        field={field}
-                                        value={product[field as keyof Product]}
-                                        key={index}
-                                    />
-                                ))}
-                                <ProductImg url={product.images[0]?.url} />
-                                {/* <div style={{ gridArea: 'img', width: '100%', height: '100%' }}>
-                                {isNotEmpty(product.images) ? (
-                                    <Carousel>
-                                        {product.images.map((image, index) => (
-                                            <ProductImg key={index} url={image.url} />
-                                        ))}
-                                    </Carousel>
-                                ) : (
-                                    <Empty />
-                                )}
-                            </div> */}
-                                <div style={{ gridArea: 'imgDesc' }}>
-                                    {product.images.map((_, index) => (
-                                        <Fragment key={index}>
-                                            <Form.Item label="Url" name={`url${index}`}>
-                                                <Input addonBefore="http://" />
+                                <ProductField field={'name'} value={product['name']} />
+                                <ProductField field={'number'} value={product['number']} />
+                                <ProductField field={'description'} value={product['description']} textArea={true} />
+                                <Form.List name="images">
+                                    {(fields, { add, remove }) => (
+                                        <>
+                                            {fields.map((field) => (
+                                                <Space
+                                                    style={{ display: 'flex', marginBottom: 8 }}
+                                                    key={field.key}
+                                                    align="center"
+                                                >
+                                                    <Form.Item
+                                                        {...field}
+                                                        name={[field.name, 'url']}
+                                                        fieldKey={[field.fieldKey, 'url']}
+                                                        rules={[{ required: true, message: 'Missing URL' }]}
+                                                    >
+                                                        <Input addonBefore="http://" />
+                                                    </Form.Item>
+                                                    <Form.Item
+                                                        {...field}
+                                                        name={[field.name, 'name']}
+                                                        fieldKey={[field.fieldKey, 'name']}
+                                                        rules={[{ required: true, message: 'Missing name' }]}
+                                                    >
+                                                        <Input />
+                                                    </Form.Item>
+                                                    <MinusCircleOutlined onClick={() => remove(field.name)} />
+                                                </Space>
+                                            ))}
+                                            <Form.Item>
+                                                <Button
+                                                    type="dashed"
+                                                    onClick={() => add()}
+                                                    block
+                                                    icon={<PlusOutlined />}
+                                                >
+                                                    Add URL
+                                                </Button>
                                             </Form.Item>
-                                            <Form.Item label="Url name" name={`name${index}`}>
-                                                <Input />
-                                            </Form.Item>
-                                        </Fragment>
-                                    ))}
-                                </div>
+                                        </>
+                                    )}
+                                </Form.List>
                                 <Form.Item>
                                     <Button type="primary" htmlType="submit">
                                         Submit
@@ -127,8 +116,8 @@ const DesktopAppProduct: FunctionComponent<{
                     ) : (
                         <Loader />
                     )}
-                </ModalGrid>
-            </ModalMain>
+                </ModalContentContainer>
+            </ModalInside>
         </Modal>
     );
 };

@@ -9,16 +9,17 @@ const Description = styled.section<{ gridArea: string }>`
     font-size: 0.75rem;
 `; */
 
-export const ProductDescription: FunctionComponent<{
+export const ProductField: FunctionComponent<{
     field: string;
     value: Product['name' | 'number' | 'description'];
-}> = ({ field, value }) => (
+    textArea?: boolean;
+}> = ({ field, value, textArea = false }) => (
     <Form.Item
         label={capitalize(field)}
         name={field}
         rules={[{ required: true, message: `Please input the ${field}!` }]}
         style={{ gridArea: field }}
     >
-        <Input value={value} />
+        {textArea ? <Input.TextArea rows={4} value={value} /> : <Input value={value} />}
     </Form.Item>
 );

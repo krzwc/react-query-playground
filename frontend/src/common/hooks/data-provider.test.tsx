@@ -2,7 +2,7 @@ import nock from 'nock';
 import fetch from 'node-fetch';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useDataProvider } from './data-provider';
-import { ENTITY_TYPES, BASE_URL } from 'common/consts';
+import { ENTITY_TYPES, BASE_URL, REQUEST_STATUSES } from 'common/consts';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactNode } from 'react';
 
@@ -30,7 +30,7 @@ describe('useDataProvider', () => {
             const { result, unmount } = renderHookResult;
 
             await waitFor(() => {
-                return result.current.data && result.current.status === 'success';
+                return result.current.data && result.current.status === REQUEST_STATUSES.SUCCESS;
             });
             actualData = result.current.data;
             unmount();

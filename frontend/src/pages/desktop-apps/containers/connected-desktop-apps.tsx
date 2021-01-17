@@ -1,5 +1,5 @@
 import DesktopApps from '../components/desktop-apps';
-import { ENTITY_TYPES } from 'common/consts';
+import { ENTITY_TYPES, REQUEST_STATUSES } from 'common/consts';
 import { FunctionComponent } from 'react';
 import { Product, Department } from '../interfaces';
 import { assertExpectedArrayShape, isProductsArr } from './helpers';
@@ -14,10 +14,10 @@ const ConnectedDesktopApps: FunctionComponent = () => {
     if (data) {
         assertExpectedArrayShape(data.products, isProductsArr);
     }
-    if (status === 'loading') {
+    if (status === REQUEST_STATUSES.LOADING) {
         return <Loader />;
     }
-    if (status === 'error') {
+    if (status === REQUEST_STATUSES.ERROR) {
         return <Empty requestFailure={true} />;
     }
 

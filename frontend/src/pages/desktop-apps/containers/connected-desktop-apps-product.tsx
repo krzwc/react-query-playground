@@ -1,5 +1,5 @@
 import DesktopAppProduct from '../components/desktop-apps-product';
-import { ENTITY_TYPES } from 'common/consts';
+import { ENTITY_TYPES, REQUEST_STATUSES } from 'common/consts';
 import { FunctionComponent } from 'react';
 import { Product } from '../interfaces';
 import { assertExpectedObjectShape, isProductObj } from './helpers';
@@ -16,10 +16,10 @@ const ConnectedDesktopAppsProduct: FunctionComponent<{
     if (data) {
         assertExpectedObjectShape(data.product, isProductObj);
     }
-    if (status === 'loading') {
+    if (status === REQUEST_STATUSES.LOADING) {
         return <Loader />;
     }
-    if (status === 'error') {
+    if (status === REQUEST_STATUSES.ERROR) {
         return <Empty requestFailure={true} />;
     }
     return data ? <DesktopAppProduct status={status} product={data.product} /> : <Empty requestFailure={false} />;

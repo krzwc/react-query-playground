@@ -14,7 +14,7 @@ export const Modal = styled.article`
     transition: all 0.2s ease-in-out;
 `;
 
-export const ModalMain = styled.section`
+export const ModalInside = styled.section`
     position: fixed;
     background: white;
     width: 80%;
@@ -25,25 +25,16 @@ export const ModalMain = styled.section`
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.7);
 `;
 
-export const ModalGrid = styled.section`
+export const ModalContentContainer = styled.section`
     width: 100%;
     height: 100%;
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 10px;
-    grid-template-rows: auto;
-    grid-template-areas:
-        'img number'
-        'img description'
-        'img name'
-        'imgDesc imgDesc';
 `;
 
 export const CrossLink = styled(Link)`
     position: absolute;
-    top: -20px;
-    right: -10px;
+    top: -40px;
+    right: -25px;
     display: table;
     text-decoration: none;
 `;

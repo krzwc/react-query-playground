@@ -22,9 +22,9 @@ export const URLS = {
 };
 
 export enum REQUEST_STATUSES {
-    PENDING = 'PENDING',
-    SUCCESS = 'SUCCESS',
-    FAILURE = 'FAILURE',
+    SUCCESS = 'success',
+    ERROR = 'error',
+    LOADING = 'loading',
 }
 
 export enum ACTION_TYPES {

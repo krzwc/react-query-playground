@@ -10,19 +10,19 @@ const isUrlAFunction = (url: ModelURL): url is ((data: SingleItemData) => URL) =
 };
 
 const http = HttpService.getInstance();
+// const queryClient = useQueryClient();
 
 export function useDataMutator<T>(entityType: ENTITY_TYPES, actionType: ACTION_TYPES, entityData?: { id: string }): UseMutationResult<T, Error, T, unknown> {
     
     const { requestMethod: method, url } = get(MODELS, [entityType, 'actions', actionType], { requestMethod: REQUEST_METHODS.PUT, url: '' });
 
     const headers = {
-                'Content-type': 'application/json; charset=UTF-8',
-            };
+        'Content-type': 'application/json; charset=UTF-8',
+    };
     const computedUrl = isUrlAFunction(url) && entityData ? url(entityData) : url as string | URL;
 
     const mutation = useMutation<T, Error, T>(entityData?.id || entityType, (body: Record<string, any>) => {
-
-        return http.request<T>({ url: computedUrl, method, headers, body: JSON.stringify(body) });
+            return http.request<T>({ url: computedUrl, method, headers, body: JSON.stringify(body) });
     });
 
     return mutation;

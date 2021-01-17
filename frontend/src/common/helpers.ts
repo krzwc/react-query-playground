@@ -33,6 +33,3 @@ export const isFunction = (functionToCheck: unknown): boolean => functionToCheck
 }; */
 
 export const stripProtocolFromFDQN = (url: string) => url.replace(/(^\w+:|^)\/\//, '');
-
-export const stripNonNumerics = (str: string) => str.replace(/\D/g, '');
-export const stripNumerics = (str: string) => str.replace(/[0-9]/g, '');
