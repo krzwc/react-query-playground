@@ -1,6 +1,6 @@
-import Department from "./department";
+import Category from "./category";
 import Product from "./product";
 
-const models = { Department, Product };
+const models = { Category, Product };
 
 export default models;

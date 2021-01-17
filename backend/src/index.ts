@@ -7,9 +7,8 @@ import routes from "./routes";
 import models from "./models";
 import { handle404, catchErrors } from "./middleware/errorHandlers";
 
-//checking db
-const createTechnologyWithSnippets = async () => {
-  const department = new models.Department({
+const populateDB = async () => {
+  const category = new models.Category({
     name: "Desktop Apps",
   });
 
@@ -22,7 +21,7 @@ const createTechnologyWithSnippets = async () => {
       { url: "http://lorempixel.com/200/200/technics/", name: "singing coach" },
       { url: "http://lorempixel.com/200/200/abstract/", name: "front side" },
     ],
-    department: department.id,
+    category: category.id,
   });
 
   const product2 = new models.Product({
@@ -32,7 +31,7 @@ const createTechnologyWithSnippets = async () => {
     description:
       "upgrade only; installation of after effects standard new disk caching tools speed up your interactive work save any combination of animation parameters as presets",
     images: [],
-    department: department.id,
+    category: category.id,
   });
 
   const product3 = new models.Product({
@@ -41,24 +40,15 @@ const createTechnologyWithSnippets = async () => {
     description:
       "reference domino designer/developer r5 doc pack includes the following titles: application development with domino designer (intermediate-advanced) 536 pages it explains building applications creating databases using forms fields views folders navi",
     images: [{ url: "http://lorempixel.com/200/200/people/", name: "cover" }],
-    department: department.id,
+    category: category.id,
   });
 
   await product1.save();
   await product2.save();
   await product3.save();
 
-  await department.save();
-
-  // const fn = async () =>
-  //   await mongoose.model("Technology").findById(tech1.id, function(err, obj) {
-  //     console.log(obj.name);
-  //   });
-
-  // console.log(fn());
+  await category.save();
 };
-// end checking db
-
 const eraseDatabaseOnSync = true;
 
 mongoose
@@ -70,11 +60,11 @@ mongoose
   .then(async () => {
     if (eraseDatabaseOnSync) {
       await Promise.all([
-        models.Department.deleteMany({}),
+        models.Category.deleteMany({}),
         models.Product.deleteMany({}),
       ]);
     }
-    createTechnologyWithSnippets();
+    populateDB();
   });
 
 mongoose.connection.on("error", (err) => {

@@ -5,7 +5,7 @@ const predicate = (arg: Record<string, any>) =>
     typeof arg.name === 'string' &&
     typeof arg.number === 'string' &&
     typeof arg.description === 'string' &&
-    typeof arg.department === 'string' &&
+    typeof arg.category === 'string' &&
     typeof arg.slug === 'string' &&
     Array.isArray(arg.images);
 

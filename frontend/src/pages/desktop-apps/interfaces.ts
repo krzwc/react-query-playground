@@ -1,9 +1,9 @@
-export interface Department {
+export interface Category {
     name: string;
 }
 
 export interface Product {
-    department: string;
+    category: string;
     description: string;
     images: { url: string; name: string }[];
     name: string;

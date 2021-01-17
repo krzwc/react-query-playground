@@ -1,35 +1,33 @@
 import { Request, Response, NextFunction } from "express";
-import Department from "../models/department";
+import Category from "../models/category";
 import Product from "../models/product";
 import { check, validationResult } from "express-validator";
 
 export default {
   async findAll(req: Request, res: Response) {
-    const departments = await Department.find().sort({ name: "desc" });
+    const categories = await Category.find().sort({ name: "desc" });
     const products = await Product.find();
 
-    return res.status(200).send({ departments, products });
+    return res.status(200).send({ categories, products });
   },
   async findOne(req: Request, res: Response, next: NextFunction) {
-    const department = await Department.findOne({ slug: req.params.slug });
+    const category = await Category.findOne({ slug: req.params.slug });
     const products = await Product.find({
-      department: department._id,
+      category: category._id,
     });
-    if (!department) return next();
+    if (!category) return next();
 
-    return res.status(200).send({ department, products });
+    return res.status(200).send({ category, products });
   },
   async update(req: Request, res: Response, next: NextFunction) {
-    const department = await Department.findOneAndUpdate(
+    const category = await Category.findOneAndUpdate(
       { slug: req.params.slug },
       { name: req.body.name },
       { new: true }
     );
-    if (!department) return next();
+    if (!category) return next();
 
-    return res
-      .status(200)
-      .send({ department, message: "Department was updated" });
+    return res.status(200).send({ category, message: "Category was updated" });
   },
   validate: [check("name").isLength({ min: 1 })],
   verifyValidation(req: Request, res: Response, next: NextFunction) {

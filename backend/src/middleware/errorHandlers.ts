@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { Error } from "./types";
 
-export const catchAsyncDecorator = fn => (
+export const catchAsyncDecorator = (fn) => (
   req: Request,
   res: Response,
   next: NextFunction
@@ -21,9 +21,6 @@ export const catchErrors = (
 ) => {
   res.status(err.status || 500);
   res.render("error", {
-    message: err.message
+    message: err.message,
   });
-  // res.json({
-  //   message: err.message
-  // });
 };

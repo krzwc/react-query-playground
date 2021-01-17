@@ -1,6 +1,6 @@
 import { ENTITY_TYPES, REQUEST_STATUSES } from 'common/consts';
 import { FunctionComponent } from 'react';
-import { Product, Department } from '../interfaces';
+import type { Product as IProduct, Category as ICategory } from '../interfaces';
 import { assertExpectedArrayShape, isProductsArr } from './helpers';
 import { useDataProvider } from 'common/hooks/data-provider';
 import { Loader } from 'components/loader/loader';
@@ -11,9 +11,7 @@ import { DesktopAppsProduct } from './desktop-apps-product';
 const productComponent = (productName: string) => <DesktopAppsProduct productName={productName} />;
 
 export const DesktopApps: FunctionComponent = () => {
-    const { status, data } = useDataProvider<{ department: Department; products: Product[] }>(
-        ENTITY_TYPES.DESKTOP_APPS,
-    );
+    const { status, data } = useDataProvider<{ category: ICategory; products: IProduct[] }>(ENTITY_TYPES.DESKTOP_APPS);
     if (data) {
         assertExpectedArrayShape(data.products, isProductsArr);
     }
