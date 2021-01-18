@@ -2,18 +2,15 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { centerMixin, mediaForMixin } from 'common/styles/css-mixins';
 
-export interface BasicImgProps {
+export interface ICategoryImg {
     url?: string;
 }
 
-export const BasicImg = styled.div<BasicImgProps>`
+export const CategoryImg = styled.div<ICategoryImg>`
     position: relative;
     background-image: url("${(props) => props.url || ''}");
     background-repeat: no-repeat;
     background-position: center center;
-`;
-
-export const ProductGridImg = styled(BasicImg)`
     width: 100%;
     background-size: 60%;
     padding-bottom: 100%;

@@ -10,7 +10,8 @@ DATABASE_URL=mongodb://root:example@0.0.0.0:27017
 In `frontend` folder add `.env` file with contents:
 
 ```
-REACT_APP_ENDPOINT=http://localhost:4000/api/
+HOST=localhost
+PORT=3000
 ```
 
 # Building

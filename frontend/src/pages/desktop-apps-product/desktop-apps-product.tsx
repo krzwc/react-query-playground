@@ -1,8 +1,8 @@
-import { Product } from '../components/product';
+import { Product } from '../../components/product/product';
 import { ENTITY_TYPES, REQUEST_STATUSES, ACTION_TYPES } from 'common/consts';
 import { FunctionComponent } from 'react';
-import type { Product as IProduct } from '../interfaces';
-import { assertExpectedObjectShape, isProductObj } from './helpers';
+import type { IProduct } from '../../components/interfaces';
+import { assertExpectedObjectShape, isProductObj } from '../helpers';
 import { useDataProvider } from 'common/hooks/data-provider';
 import { Loader } from 'components/loader/loader';
 import { Empty } from 'components/empty/empty';

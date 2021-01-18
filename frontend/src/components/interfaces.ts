@@ -1,8 +1,7 @@
-export interface Category {
+export interface ICategory {
     name: string;
 }
-
-export interface Product {
+export interface IProduct {
     category: string;
     description: string;
     images: { url: string; name: string }[];

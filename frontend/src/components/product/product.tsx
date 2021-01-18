@@ -2,16 +2,18 @@ import { FunctionComponent } from 'react';
 import { Modal, ModalInside, ModalContentContainer, CloseCross, CrossLink } from './product-styled-components';
 import { ProductField } from './product-field';
 import { Loader } from 'components/loader/loader';
-import type { Product as IProduct } from '../interfaces';
+import type { IProduct } from '../interfaces';
 import { QueryStatus, QueryClient, UseMutationResult } from 'react-query';
 import { Input, Form, Button, notification, Space } from 'antd';
 import { stripProtocolFromFDQN, isNotEmpty } from 'common/helpers';
 import { REQUEST_STATUSES } from 'common/consts';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
+const httpPrefix = 'http://';
+
 const transformValuesToSend = (values: Record<string, any>) => ({
     ...values,
-    images: values.images.map((image: {url: string, name: string}) => ({ ...image, url: 'http://' + image.url })),
+    images: values.images.map((image: {url: string, name: string}) => ({ ...image, url: httpPrefix + image.url })),
 });
 
 export const Product: FunctionComponent<{
@@ -73,7 +75,7 @@ export const Product: FunctionComponent<{
                                                     fieldKey={[field.fieldKey, 'url']}
                                                     rules={[{ required: true, message: 'Missing URL' }]}
                                                 >
-                                                    <Input addonBefore="http://" />
+                                                    <Input addonBefore={httpPrefix} />
                                                 </Form.Item>
                                                 <Form.Item
                                                     {...field}

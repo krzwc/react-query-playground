@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
-import { Product } from '../interfaces';
+import type { IProduct } from 'components/interfaces';
 import { Input, Form } from 'antd';
 import capitalize from 'lodash-es/capitalize';
 
 export const ProductField: FunctionComponent<{
     field: string;
-    value: Product['name' | 'number' | 'description'];
+    value: IProduct['name' | 'number' | 'description'];
     textArea?: boolean;
 }> = ({ field, value, textArea = false }) => (
     <Form.Item

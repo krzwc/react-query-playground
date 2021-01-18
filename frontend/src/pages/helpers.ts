@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Product } from '../interfaces';
+import type { IProduct } from 'components/interfaces';
 
 const predicate = (arg: Record<string, any>) =>
     typeof arg.name === 'string' &&
@@ -9,11 +9,11 @@ const predicate = (arg: Record<string, any>) =>
     typeof arg.slug === 'string' &&
     Array.isArray(arg.images);
 
-export function isProductsArr(arg: any): arg is Product[] {
+export function isProductsArr(arg: any): arg is IProduct[] {
     return predicate(arg);
 }
 
-export function isProductObj(arg: any): arg is Product {
+export function isProductObj(arg: any): arg is IProduct {
     return predicate(arg);
 }
 

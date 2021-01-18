@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { BasicImg } from './desktop-apps-styled-components';
-import { centerMixin, mediaForMixin } from 'common/styles/css-mixins';
+import { centerMixin } from 'common/styles/css-mixins';
 import { Link } from 'react-router-dom';
 
 export const Modal = styled.article`
@@ -43,9 +42,4 @@ export const CloseCross = styled.span`
     color: black;
     /* text-decoration: none; */
     font-size: 30px;
-`;
-
-export const ProductImg = styled(BasicImg)`
-    background-size: auto 100%;
-    ${mediaForMixin(['800px'], 'background-size: 100% auto;')}
 `;
