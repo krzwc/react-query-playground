@@ -11,7 +11,7 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const httpPrefix = 'http://';
 
-const transformValuesToSend = (values: Record<string, any>) => ({
+const transformValuesToSend = (values: IProduct) => ({
     ...values,
     images: values.images.map((image: {url: string, name: string}) => ({ ...image, url: httpPrefix + image.url })),
 });
@@ -19,14 +19,15 @@ const transformValuesToSend = (values: Record<string, any>) => ({
 export const Product: FunctionComponent<{
     product: IProduct;
     status: QueryStatus;
-    mutation: UseMutationResult<any, Error, any, unknown>;
+    mutation: UseMutationResult<IProduct, Error, IProduct, unknown>;
     queryClient: QueryClient;
 }> = ({ product, status, mutation, queryClient }) => {
 
-    const onFinish = async (values: any) => {
+    const onFinish = async (values: IProduct) => {
         const valuesToSend = transformValuesToSend(values);
         try {
-            await mutation.mutateAsync(valuesToSend);
+            const mutationResult = mutation.mutateAsync(valuesToSend);
+            await mutationResult && queryClient.invalidateQueries(product.name);
         } catch (error) {
             notification[REQUEST_STATUSES.ERROR]({
                 message: 'Update notification',
@@ -37,7 +38,6 @@ export const Product: FunctionComponent<{
                 message: 'Update notification',
                 description: 'Successfully updated',
             });
-            queryClient.invalidateQueries(product.name);
         }
     };
 

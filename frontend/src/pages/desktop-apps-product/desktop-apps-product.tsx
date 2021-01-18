@@ -16,7 +16,7 @@ export const DesktopAppsProduct: FunctionComponent<{
         id: productName,
     });
     const queryClient = useQueryClient();
-    const mutation = useDataMutator(ENTITY_TYPES.DESKTOP_APPS_PRODUCT, ACTION_TYPES.UPDATE, {
+    const mutation = useDataMutator<IProduct>(ENTITY_TYPES.DESKTOP_APPS_PRODUCT, ACTION_TYPES.UPDATE, {
         id: productName,
     });
     if (data) {

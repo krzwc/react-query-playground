@@ -2,11 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { centerMixin, mediaForMixin } from 'common/styles/css-mixins';
 
-export interface ICategoryImg {
-    url?: string;
-}
-
-export const CategoryImg = styled.div<ICategoryImg>`
+export const CategoryImg = styled.div<{ url?: string }>`
     position: relative;
     background-image: url("${(props) => props.url || ''}");
     background-repeat: no-repeat;

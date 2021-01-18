@@ -20,7 +20,7 @@ export function useDataMutator<T>(entityType: ENTITY_TYPES, actionType: ACTION_T
     };
     const computedUrl = isUrlAFunction(url) && entityData ? url(entityData) : url as string | URL;
 
-    const mutation = useMutation<T, Error, T>(entityData?.id || entityType, (body: Record<string, any>) => {
+    const mutation = useMutation<T, Error, T>(entityData?.id || entityType, (body: T) => {
             return http.request<T>({ url: computedUrl, method, headers, body: JSON.stringify(body) });
     });
 
