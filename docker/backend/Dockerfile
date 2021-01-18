@@ -4,4 +4,4 @@ WORKDIR /app
 COPY ./backend/package*.json ./
 RUN npm ci -qy
 COPY ./backend .
-CMD [ "npm", "run", "run:dev" ]
+CMD [ "npm", "run", "start" ]

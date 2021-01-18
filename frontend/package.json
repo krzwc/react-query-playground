@@ -1,5 +1,5 @@
 {
-    "name": "to-be-updated",
+    "name": "bluestone-frontend",
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
@@ -14,13 +14,13 @@
         "________________________________Project cleaning____________________________": "",
         "format": "prettier --write \"**/*.{js,ts,tsx}\"",
         "clean": "rm -rf dist prodBundleReport.html",
-        "clean:all": "yarn clean && rm -rf node_modules",
+        "clean:all": "npm run clean && rm -rf node_modules",
         "________________________________Project testing_____________________________": "",
         "test": "jest --config=./config/jest/jest.config.ts",
-        "test:watch": "yarn test -- --watch",
+        "test:watch": "npm run test -- --watch",
         "cypress:open": "cypress open",
         "cypress:run": "cypress run",
-        "cypress:run:spec": "yarn cypress:run -- --headless --spec \"cypress/integration/sample_spec.ts\"",
+        "cypress:run:spec": "npm run cypress:run -- --headless --spec \"cypress/integration/sample_spec.ts\"",
         "cypress:start": "start-server-and-test start:test http://localhost:3000 cypress:run:spec"
     },
     "devDependencies": {
@@ -83,7 +83,6 @@
         "webpack-cli": "^4.3.0",
         "webpack-dev-server": "^3.11.0",
         "webpack-merge": "^5.7.3",
-        "yarn": "^1.22.10",
         "cypress": "^6.0.1",
         "eslint-plugin-cypress": "^2.11.2",
         "install": "^0.13.0",

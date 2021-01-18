@@ -11,7 +11,7 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const transformValuesToSend = (values: Record<string, any>) => ({
     ...values,
-    images: values.images.map((image) => ({ ...image, url: 'http://' + image.url })),
+    images: values.images.map((image: {url: string, name: string}) => ({ ...image, url: 'http://' + image.url })),
 });
 
 export const Product: FunctionComponent<{
