@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type { IProduct } from 'components/interfaces';
+import type { IProduct, ICategory } from 'components/interfaces';
 
 const predicate = (arg: Record<string, any>) =>
     typeof arg.name === 'string' &&
@@ -15,6 +15,10 @@ export function isProductsArr(arg: any): arg is IProduct[] {
 
 export function isProductObj(arg: any): arg is IProduct {
     return predicate(arg);
+}
+
+export function isCategoryObj(arg: any): arg is ICategory {
+    return typeof arg.name === 'string' && typeof arg.slug === 'string';
 }
 
 export function assertExpectedArrayShape<T>(arg: any, check: (val: any) => val is T): asserts arg is T[] {

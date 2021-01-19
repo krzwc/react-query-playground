@@ -14,17 +14,17 @@ export const Category: FunctionComponent<{
     products: IProduct[];
     status: QueryStatus;
     productComponent: (productName: string) => ReactNode;
-}> = ({ category, products = [], status, productComponent }) => {
+}> = ({ category: { name: categoryName, slug: categorySlug }, products = [], status, productComponent }) => {
     return (
         <Router>
             <Container>
-                <PageHeader title={category.name} />
+                <PageHeader title={categoryName} />
                 <Grid>
                     {status !== REQUEST_STATUSES.LOADING && status !== REQUEST_STATUSES.ERROR ? (
-                        products.map(({ name, slug, images, number }) => (
-                            <StyledLink to={`/details/${slug}`} key={name}>
+                        products.map(({ name: productName, slug: productSlug, images, number }) => (
+                            <StyledLink to={`/${categorySlug}/${productSlug}`} key={productName}>
                                 {isNotEmpty(images) ? <CategoryImg url={images[0].url} /> : <Empty />}
-                                <h3>{name}</h3>
+                                <h3>{productName}</h3>
                                 <h5>{number}</h5>
                             </StyledLink>
                         ))
@@ -35,8 +35,8 @@ export const Category: FunctionComponent<{
             </Container>
             <Switch>
                 {isNotEmpty(products) &&
-                    products.map(({ name: productName, slug }) => (
-                        <Route path={`/details/${slug}`} key={productName}>
+                    products.map(({ name: productName, slug: productSlug }) => (
+                        <Route path={`/${categorySlug}/${productSlug}`} key={productName}>
                             <Suspense fallback={<Loader />}>{productComponent(productName)}</Suspense>
                         </Route>
                     ))}

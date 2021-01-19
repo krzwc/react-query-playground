@@ -6,7 +6,7 @@ import { Loader } from 'components/loader';
 import { Empty } from 'components/empty';
 import { Category } from 'components/category';
 import { DesktopAppsProduct } from '../desktop-apps-product/desktop-apps-product';
-import { assertExpectedArrayShape, isProductsArr } from '../helpers';
+import { assertExpectedArrayShape, assertExpectedObjectShape, isProductsArr, isCategoryObj } from '../helpers';
 
 const productComponent = (productName: string) => <DesktopAppsProduct productName={productName} />;
 
@@ -14,6 +14,7 @@ export const DesktopApps: FunctionComponent = () => {
     const { status, data } = useDataProvider<{ category: ICategory; products: IProduct[] }>(ENTITY_TYPES.DESKTOP_APPS);
     if (data) {
         assertExpectedArrayShape(data.products, isProductsArr);
+        assertExpectedObjectShape(data.category, isCategoryObj);
     }
     if (status === REQUEST_STATUSES.LOADING) {
         return <Loader />;

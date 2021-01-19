@@ -1,5 +1,6 @@
 export interface ICategory {
     name: string;
+    slug: string;
 }
 export interface IProduct {
     category: string;
