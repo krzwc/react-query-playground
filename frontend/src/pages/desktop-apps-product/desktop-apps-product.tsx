@@ -29,5 +29,3 @@ export const DesktopAppsProduct: FunctionComponent<{
     }
     return data ? <Product status={status} product={data.product} queryClient={queryClient} mutation={mutation} /> : <Empty requestFailure={false} />;
 };
-
-export default DesktopAppsProduct;

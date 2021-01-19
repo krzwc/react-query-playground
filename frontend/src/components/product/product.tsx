@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react';
-import { Modal, ModalInside, ModalContentContainer, CloseCross, CrossLink } from './product-styled-components';
-import { ProductField } from './product-field';
-import { Loader } from 'components/loader/loader';
-import type { IProduct } from '../interfaces';
-import { QueryStatus, QueryClient, UseMutationResult } from 'react-query';
-import { Input, Form, Button, notification, Space } from 'antd';
-import { stripProtocolFromFDQN, isNotEmpty } from 'common/helpers';
-import { REQUEST_STATUSES } from 'common/consts';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Input, Form, Button, notification, Space } from 'antd';
+import { QueryStatus, QueryClient, UseMutationResult } from 'react-query';
+import { stripProtocolFromFDQN, isNotEmpty } from 'common/helpers';
+import { Loader } from 'components/loader';
+import { ProductField } from './product-field';
+import { REQUEST_STATUSES } from 'common/consts';
+import { Modal, ModalInside, ModalContentContainer, CloseCross, CrossLink } from './product-styled-components';
+import type { IProduct } from '../interfaces';
 
 const httpPrefix = 'http://';
 
@@ -15,6 +15,21 @@ const transformValuesToSend = (values: IProduct) => ({
     ...values,
     images: values.images.map((image: {url: string, name: string}) => ({ ...image, url: httpPrefix + image.url })),
 });
+
+const notificationFacade = {
+    sendSuccessNotification() {
+        notification[REQUEST_STATUSES.SUCCESS]({
+                    message: 'Update notification',
+                    description: 'Successfully updated',
+                });
+    },
+    sendErrorNotification() {
+        notification[REQUEST_STATUSES.ERROR]({
+                message: 'Update notification',
+                description: 'Update not successful',
+            });
+    },
+};
 
 export const Product: FunctionComponent<{
     product: IProduct;
@@ -26,18 +41,13 @@ export const Product: FunctionComponent<{
     const onFinish = async (values: IProduct) => {
         const valuesToSend = transformValuesToSend(values);
         try {
-            const mutationResult = mutation.mutateAsync(valuesToSend);
-            await mutationResult && queryClient.invalidateQueries(product.name);
+            const mutationResult = await mutation.mutateAsync(valuesToSend);
+            if (mutationResult) {
+                await queryClient.invalidateQueries(product.name);
+                notificationFacade.sendSuccessNotification();
+            }
         } catch (error) {
-            notification[REQUEST_STATUSES.ERROR]({
-                message: 'Update notification',
-                description: 'Update not successful',
-            });
-        } finally {
-            notification[REQUEST_STATUSES.SUCCESS]({
-                message: 'Update notification',
-                description: 'Successfully updated',
-            });
+            notificationFacade.sendSuccessNotification();
         }
     };
 
