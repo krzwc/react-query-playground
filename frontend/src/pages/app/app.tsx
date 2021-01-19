@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { createGlobalStyle } from 'styled-components';
-import { DesktopApps } from 'pages/desktop-apps/desktop-apps';
+import { DesktopApps } from 'pages/desktop-apps';
 import 'antd/dist/antd.css';
 
 const GlobalStyle = createGlobalStyle`

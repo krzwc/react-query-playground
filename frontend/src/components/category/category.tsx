@@ -1,13 +1,13 @@
 import { FunctionComponent, Suspense, ReactNode } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { QueryStatus } from 'react-query';
+import { PageHeader } from 'antd';
+import { Loader } from 'components/loader';
+import { isNotEmpty } from 'common/helpers';
+import { Empty } from 'components/empty';
+import { REQUEST_STATUSES } from 'common/consts';
 import { CategoryImg, StyledLink, Grid, Container } from './category-styled-components';
 import type { ICategory, IProduct } from '../interfaces';
-import { Loader } from 'components/loader/loader';
-import { QueryStatus } from 'react-query';
-import { isNotEmpty } from 'common/helpers';
-import { Empty } from 'components/empty/empty';
-import { REQUEST_STATUSES } from 'common/consts';
-import { PageHeader } from 'antd';
 
 export const Category: FunctionComponent<{
     category: ICategory;

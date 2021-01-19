@@ -17,13 +17,6 @@ export const CategoryImg = styled.div<{ url?: string }>`
     ${mediaForMixin(['768px'], 'background-size: 40%; padding-bottom: 60%;')}
 `;
 
-export const Div = styled.div`
-    width: 100%;
-    height: auto;
-    ${centerMixin};
-    cursor: pointer;
-`;
-
 export const StyledLink = styled(Link)`
     ${centerMixin};
     color: black;

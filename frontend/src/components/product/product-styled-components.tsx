@@ -40,6 +40,5 @@ export const CrossLink = styled(Link)`
 
 export const CloseCross = styled.span`
     color: black;
-    /* text-decoration: none; */
     font-size: 30px;
 `;

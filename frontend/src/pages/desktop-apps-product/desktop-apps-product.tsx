@@ -1,13 +1,12 @@
-import { Product } from '../../components/product/product';
-import { ENTITY_TYPES, REQUEST_STATUSES, ACTION_TYPES } from 'common/consts';
 import { FunctionComponent } from 'react';
-import type { IProduct } from '../../components/interfaces';
-import { assertExpectedObjectShape, isProductObj } from '../helpers';
-import { useDataProvider } from 'common/hooks/data-provider';
-import { Loader } from 'components/loader/loader';
-import { Empty } from 'components/empty/empty';
+import { Product } from 'components/product/product';
+import { ENTITY_TYPES, REQUEST_STATUSES, ACTION_TYPES } from 'common/consts';
+import type { IProduct } from 'components/interfaces';
+import { useDataProvider, useDataMutator } from 'common/hooks';
+import { Loader } from 'components/loader';
+import { Empty } from 'components/empty';
 import { useQueryClient } from 'react-query';
-import { useDataMutator } from 'common/hooks/data-mutator';
+import { assertExpectedObjectShape, isProductObj } from '../helpers';
 
 export const DesktopAppsProduct: FunctionComponent<{
     productName: string;

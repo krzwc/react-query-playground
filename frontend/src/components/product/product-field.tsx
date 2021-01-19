@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import type { IProduct } from 'components/interfaces';
 import { Input, Form } from 'antd';
 import capitalize from 'lodash-es/capitalize';
+import type { IProduct } from 'components/interfaces';
 
 export const ProductField: FunctionComponent<{
     field: string;
