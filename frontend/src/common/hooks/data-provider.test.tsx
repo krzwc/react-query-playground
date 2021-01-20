@@ -19,9 +19,7 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 describe('useDataProvider', () => {
     it('should return data when API responds with 200', async () => {
         let actualData = null;
-        nock(BASE_URL)
-            .get('/desktop-apps')
-            .reply(200, { answer: 'mocked answer' });
+        nock(BASE_URL).persist().get('/desktop-apps').reply(200, { answer: 'mocked answer' });
 
         await act(async () => {
             const renderHookResult = renderHook(() => useDataProvider<{ answer: string }>(ENTITY_TYPES.DESKTOP_APPS), {

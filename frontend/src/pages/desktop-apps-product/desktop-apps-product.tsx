@@ -18,14 +18,18 @@ export const DesktopAppsProduct: FunctionComponent<{
     const mutation = useDataMutator<IProduct>(ENTITY_TYPES.DESKTOP_APPS_PRODUCT, ACTION_TYPES.UPDATE, {
         id: productName,
     });
-    if (data) {
-        assertExpectedObjectShape(data.product, isProductObj);
-    }
     if (status === REQUEST_STATUSES.LOADING) {
         return <Loader />;
     }
     if (status === REQUEST_STATUSES.ERROR) {
         return <Empty requestFailure={true} />;
     }
-    return data ? <Product status={status} product={data.product} queryClient={queryClient} mutation={mutation} /> : <Empty requestFailure={false} />;
+    if (data && status === REQUEST_STATUSES.SUCCESS) {
+        assertExpectedObjectShape(data.product, isProductObj);
+    }
+    return data ? (
+        <Product status={status} product={data.product} queryClient={queryClient} mutation={mutation} />
+    ) : (
+        <Empty requestFailure={false} />
+    );
 };

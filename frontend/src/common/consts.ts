@@ -2,7 +2,7 @@ import type { SingleItemData } from 'common/interfaces';
 
 export enum ENTITY_TYPES {
     DESKTOP_APPS = 'desktop-apps',
-    DESKTOP_APPS_PRODUCT = 'desktop-apps-product'
+    DESKTOP_APPS_PRODUCT = 'desktop-apps-product',
 }
 
 export const URL_SEPARATOR = '/';

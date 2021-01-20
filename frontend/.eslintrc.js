@@ -34,9 +34,9 @@ module.exports = {
         '@typescript-eslint/no-use-before-define': 'off',
         'no-console': 'error',
         'no-duplicate-imports': 'error',
-        /** 
+        /**
          * Disabled due to using the new JSX transform
-        */
+         */
         'react/jsx-uses-react': 'off',
         'react/react-in-jsx-scope': 'off',
     },

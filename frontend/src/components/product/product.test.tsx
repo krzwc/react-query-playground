@@ -5,17 +5,17 @@ import { QueryClient, UseMutationResult } from 'react-query';
 import type { IProduct } from '../interfaces';
 
 Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: jest.fn().mockImplementation(query => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
+    writable: true,
+    value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // deprecated
+        removeListener: jest.fn(), // deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+    })),
 });
 
 export const product = JSON.parse(
@@ -30,7 +30,12 @@ describe('Product', () => {
     it('renders product name', () => {
         const { getByText } = render(
             <BrowserRouter>
-                <Product product={product.product} status={REQUEST_STATUSES.SUCCESS} mutation={mutation} queryClient={queryClient} />
+                <Product
+                    product={product.product}
+                    status={REQUEST_STATUSES.SUCCESS}
+                    mutation={mutation}
+                    queryClient={queryClient}
+                />
             </BrowserRouter>,
         );
         expect(getByText('b0006se5bq')).toBeInTheDocument();

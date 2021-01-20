@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Input, Form } from 'antd';
-import capitalize from 'lodash-es/capitalize';
+import { capitalize } from 'common/helpers';
 import type { IProduct } from 'components/interfaces';
 
 export const ProductField: FunctionComponent<{

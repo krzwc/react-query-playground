@@ -26,3 +26,5 @@ export const noop = (): undefined => undefined;
 export const isFunction = (functionToCheck: unknown): boolean => functionToCheck instanceof Function;
 
 export const stripProtocolFromFDQN = (url: string) => url.replace(/(^\w+:|^)\/\//, '');
+
+export const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
