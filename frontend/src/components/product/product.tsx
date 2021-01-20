@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Input, Form, Button, notification, Space } from 'antd';
+import { Input, Form, Button, notification, Space, PageHeader } from 'antd';
 import { QueryStatus, QueryClient, UseMutationResult } from 'react-query';
 import { stripProtocolFromFDQN, isNotEmpty } from 'common/helpers';
 import { Loader } from 'components/loader';
@@ -66,6 +66,8 @@ export const Product: FunctionComponent<{
                         <CloseCross>&times;</CloseCross>
                     </CrossLink>
                     {status !== REQUEST_STATUSES.LOADING && status !== REQUEST_STATUSES.ERROR ? (
+                        <>
+                        <PageHeader title={product['name']} />
                         <Form name="product_form" onFinish={onFinish} initialValues={initialValues}>
                             <ProductField field={'name'} value={product['name']} />
                             <ProductField field={'number'} value={product['number']} />
@@ -111,7 +113,8 @@ export const Product: FunctionComponent<{
                                     Submit
                                 </Button>
                             </Form.Item>
-                        </Form>
+                            </Form>
+                            </>
                     ) : (
                         <Loader />
                     )}

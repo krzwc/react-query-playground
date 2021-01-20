@@ -11,13 +11,12 @@ module.exports = {
     },
     moduleNameMapper: {
         '^lodash-es$': 'lodash', // will replace lodash-es with the commonjs version during testing runtime
+        '^lodash-es/(.*)$': 'lodash/$1',
         '^common$': '<rootDir>common',
-        'common/(.*)$': '<rootDir>common/$1',
+        '^common/(.*)$': '<rootDir>common/$1',
         '^components$': '<rootDir>components',
-        'components/(.*)$': '<rootDir>components/$1',
+        '^components/(.*)$': '<rootDir>components/$1',
         '^pages$': '<rootDir>pages',
-        'pages/(.*)$': '<rootDir>pages/$1',
-        '^wrappers$': '<rootDir>wrappers',
-        'wrappers/(.*)$': '<rootDir>wrappers/$1',
+        '^pages/(.*)$': '<rootDir>pages/$1',
     },
 };
