@@ -59,6 +59,11 @@ I added merely a few sanity integration/e2e tests to make sure the UI works as e
 
 ```sh
 npm run test
+```
+
+and with DB and BE running
+
+```sh
 npm run cypress:start
 ```
 

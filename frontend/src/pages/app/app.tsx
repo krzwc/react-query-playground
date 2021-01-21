@@ -13,11 +13,8 @@ const GlobalStyle = createGlobalStyle`
   *, *:before, *:after {
     box-sizing: inherit;
   }
-
-  .App {
-    text-align: center;
-  }
   
+  //ant design overrides
   .ant-space > .ant-space-item:first-of-type {
     width: 100%;
   }
@@ -34,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
 const queryClient = new QueryClient();
 
 export const App: FunctionComponent = () => (
-    <div className="App">
+    <div id="app">
         <QueryClientProvider client={queryClient}>
             <DesktopApps />
             <ReactQueryDevtools initialIsOpen={false} />

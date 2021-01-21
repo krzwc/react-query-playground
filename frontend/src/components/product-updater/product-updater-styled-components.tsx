@@ -27,6 +27,7 @@ export const ModalInside = styled.section`
 export const ModalContentContainer = styled.section`
     width: 100%;
     height: 100%;
+    text-align: center;
     position: relative;
 `;
 
