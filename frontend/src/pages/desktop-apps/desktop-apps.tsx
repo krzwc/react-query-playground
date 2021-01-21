@@ -5,10 +5,10 @@ import { useDataProvider } from 'common/hooks';
 import { Loader } from 'components/loader';
 import { Empty } from 'components/empty';
 import { Category } from 'components/category';
-import { DesktopAppsProduct } from '../desktop-apps-product';
+import { DesktopAppsProductUpdater } from '../desktop-apps-product';
 import { assertExpectedArrayShape, assertExpectedObjectShape, isProductsArr, isCategoryObj } from '../helpers';
 
-const productComponent = (productName: string) => <DesktopAppsProduct productName={productName} />;
+const productComponent = (productName: string) => <DesktopAppsProductUpdater productName={productName} />;
 
 export const DesktopApps: FunctionComponent = () => {
     const { status, data } = useDataProvider<{ category: ICategory; products: IProduct[] }>(ENTITY_TYPES.DESKTOP_APPS);

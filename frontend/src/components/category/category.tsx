@@ -14,43 +14,41 @@ export const Category: FunctionComponent<{
     products: IProduct[];
     status: QueryStatus;
     productComponent: (productName: string) => ReactNode;
-}> = ({ category: { name: categoryName, slug: categorySlug }, products = [], status, productComponent }) => {
-    return (
-        <Router>
-            <Container>
-                <PageHeader title={categoryName} />
-                <Grid>
-                    {status !== REQUEST_STATUSES.LOADING && status !== REQUEST_STATUSES.ERROR ? (
-                        products.map(({ name: productName, slug: productSlug, images, number }) => (
-                            <StyledLink to={`/${categorySlug}/${productSlug}`} key={productName}>
-                                {isNotEmpty(images) ? (
-                                    <Image
-                                        width={200}
-                                        height={200}
-                                        src={images[0].url}
-                                        preview={false}
-                                        placeholder={Antdmpty.PRESENTED_IMAGE_SIMPLE}
-                                    />
-                                ) : (
-                                    <Empty />
-                                )}
-                                <h3>{productName}</h3>
-                                <h5>{number}</h5>
-                            </StyledLink>
-                        ))
-                    ) : (
-                        <Loader />
-                    )}
-                </Grid>
-            </Container>
-            <Switch>
-                {isNotEmpty(products) &&
-                    products.map(({ name: productName, slug: productSlug }) => (
-                        <Route path={`/${categorySlug}/${productSlug}`} key={productName}>
-                            {productComponent(productName)}
-                        </Route>
-                    ))}
-            </Switch>
-        </Router>
-    );
-};
+}> = ({ category: { name: categoryName, slug: categorySlug }, products = [], status, productComponent }) => (
+    <Router>
+        <Container>
+            <PageHeader title={categoryName} />
+            <Grid>
+                {status !== REQUEST_STATUSES.LOADING && status !== REQUEST_STATUSES.ERROR ? (
+                    products.map(({ name: productName, slug: productSlug, images, number }) => (
+                        <StyledLink to={`/${categorySlug}/${productSlug}`} key={productName}>
+                            {isNotEmpty(images) ? (
+                                <Image
+                                    width={200}
+                                    height={200}
+                                    src={images[0].url}
+                                    preview={false}
+                                    placeholder={Antdmpty.PRESENTED_IMAGE_SIMPLE}
+                                />
+                            ) : (
+                                <Empty />
+                            )}
+                            <h3>{productName}</h3>
+                            <h5>{number}</h5>
+                        </StyledLink>
+                    ))
+                ) : (
+                    <Loader />
+                )}
+            </Grid>
+        </Container>
+        <Switch>
+            {isNotEmpty(products) &&
+                products.map(({ name: productName, slug: productSlug }) => (
+                    <Route path={`/${categorySlug}/${productSlug}`} key={productName}>
+                        {productComponent(productName)}
+                    </Route>
+                ))}
+        </Switch>
+    </Router>
+);

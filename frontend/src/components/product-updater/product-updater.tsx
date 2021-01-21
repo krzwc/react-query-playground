@@ -4,9 +4,9 @@ import { Input, Form, Button, notification, Space, PageHeader } from 'antd';
 import { QueryStatus, QueryClient, UseMutationResult } from 'react-query';
 import { stripProtocolFromFDQN, isNotEmpty } from 'common/helpers';
 import { Loader } from 'components/loader';
-import { ProductField } from './product-field';
+import { ProductInput } from './product-input';
 import { REQUEST_STATUSES } from 'common/consts';
-import { Modal, ModalInside, ModalContentContainer, CloseCross, CrossLink } from './product-styled-components';
+import { Modal, ModalInside, ModalContentContainer, CloseCross, CrossLink } from './product-updater-styled-components';
 import type { IProduct } from '../interfaces';
 
 const httpPrefix = 'http://';
@@ -31,7 +31,7 @@ const notificationFacade = {
     },
 };
 
-export const Product: FunctionComponent<{
+export const ProductUpdater: FunctionComponent<{
     product: IProduct;
     status: QueryStatus;
     mutation: UseMutationResult<IProduct, Error, IProduct, unknown>;
@@ -68,9 +68,9 @@ export const Product: FunctionComponent<{
                         <>
                             <PageHeader title={product['name']} />
                             <Form name="product_form" onFinish={onFinish} initialValues={initialValues}>
-                                <ProductField field={'name'} value={product['name']} />
-                                <ProductField field={'number'} value={product['number']} />
-                                <ProductField field={'description'} value={product['description']} textArea={true} />
+                                <ProductInput field={'name'} value={product['name']} />
+                                <ProductInput field={'number'} value={product['number']} />
+                                <ProductInput field={'description'} value={product['description']} textArea={true} />
                                 <Form.List name="images">
                                     {(fields, { add, remove }) => (
                                         <>

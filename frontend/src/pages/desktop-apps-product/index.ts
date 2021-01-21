@@ -1,1 +1,1 @@
-export * from './desktop-apps-product';
+export * from './desktop-apps-product-updater';

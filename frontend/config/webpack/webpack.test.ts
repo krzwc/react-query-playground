@@ -2,9 +2,9 @@ import { Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 import TerserPlugin from 'terser-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import common from '../../webpack.common';
 import { createHtmlWebpackPluginConfig } from './common/html-webpack-plugin';
 import { APP_TITLE, SRC_PATH } from './config';
+import common from '../../webpack.common';
 
 const htmlWebpackPluginConfig = createHtmlWebpackPluginConfig(APP_TITLE, SRC_PATH);
 

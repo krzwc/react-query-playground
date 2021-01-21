@@ -33,14 +33,12 @@ const GlobalStyle = createGlobalStyle`
 
 const queryClient = new QueryClient();
 
-export const App: FunctionComponent = () => {
-    return (
-        <div className="App">
-            <QueryClientProvider client={queryClient}>
-                <DesktopApps />
-                <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
-            <GlobalStyle />
-        </div>
-    );
-};
+export const App: FunctionComponent = () => (
+    <div className="App">
+        <QueryClientProvider client={queryClient}>
+            <DesktopApps />
+            <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+        <GlobalStyle />
+    </div>
+);

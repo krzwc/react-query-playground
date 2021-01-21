@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Product } from 'components/product/product';
+import { ProductUpdater } from 'components/product-updater';
 import { ENTITY_TYPES, REQUEST_STATUSES, ACTION_TYPES } from 'common/consts';
 import type { IProduct } from 'components/interfaces';
 import { useDataProvider, useDataMutator } from 'common/hooks';
@@ -8,7 +8,7 @@ import { Empty } from 'components/empty';
 import { useQueryClient } from 'react-query';
 import { assertExpectedObjectShape, isProductObj } from '../helpers';
 
-export const DesktopAppsProduct: FunctionComponent<{
+export const DesktopAppsProductUpdater: FunctionComponent<{
     productName: string;
 }> = ({ productName }) => {
     const { status, data } = useDataProvider<{ product: IProduct }>(ENTITY_TYPES.DESKTOP_APPS_PRODUCT, {
@@ -28,7 +28,7 @@ export const DesktopAppsProduct: FunctionComponent<{
         assertExpectedObjectShape(data.product, isProductObj);
     }
     return data ? (
-        <Product status={status} product={data.product} queryClient={queryClient} mutation={mutation} />
+        <ProductUpdater status={status} product={data.product} queryClient={queryClient} mutation={mutation} />
     ) : (
         <Empty requestFailure={false} />
     );

@@ -3,7 +3,7 @@ import { Input, Form } from 'antd';
 import { capitalize } from 'common/helpers';
 import type { IProduct } from 'components/interfaces';
 
-export const ProductField: FunctionComponent<{
+export const ProductInput: FunctionComponent<{
     field: string;
     value: IProduct['name' | 'number' | 'description'];
     textArea?: boolean;

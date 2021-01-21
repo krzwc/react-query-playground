@@ -1,4 +1,4 @@
-import { Product } from './product';
+import { ProductUpdater } from './product-updater';
 import { BrowserRouter } from 'react-router-dom';
 import { REQUEST_STATUSES } from 'common/consts';
 import { QueryClient, UseMutationResult } from 'react-query';
@@ -30,7 +30,7 @@ describe('Product', () => {
     it('renders product name', () => {
         const { getByText } = render(
             <BrowserRouter>
-                <Product
+                <ProductUpdater
                     product={product.product}
                     status={REQUEST_STATUSES.SUCCESS}
                     mutation={mutation}

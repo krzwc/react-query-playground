@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:14-alpine
 RUN mkdir -p /app
 WORKDIR /app
 COPY ./frontend/package*.json ./
