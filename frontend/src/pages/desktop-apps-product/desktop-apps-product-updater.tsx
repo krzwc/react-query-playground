@@ -28,7 +28,7 @@ export const DesktopAppsProductUpdater: FunctionComponent<{
         assertExpectedObjectShape(data.product, isProductObj);
     }
     return data ? (
-        <ProductUpdater status={status} product={data.product} queryClient={queryClient} mutation={mutation} />
+        <ProductUpdater status={status} product={data.product} categoryName={ENTITY_TYPES.DESKTOP_APPS} queryClient={queryClient} mutation={mutation} />
     ) : (
         <Empty requestFailure={false} />
     );

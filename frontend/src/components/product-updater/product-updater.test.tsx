@@ -35,6 +35,7 @@ describe('Product', () => {
                     status={REQUEST_STATUSES.SUCCESS}
                     mutation={mutation}
                     queryClient={queryClient}
+                    categoryName={"test"}
                 />
             </BrowserRouter>,
         );

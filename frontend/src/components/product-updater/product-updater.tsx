@@ -36,13 +36,15 @@ export const ProductUpdater: FunctionComponent<{
     status: QueryStatus;
     mutation: UseMutationResult<IProduct, Error, IProduct, unknown>;
     queryClient: QueryClient;
-}> = ({ product, status, mutation, queryClient }) => {
+    categoryName: string;
+}> = ({ product, status, mutation, queryClient, categoryName }) => {
     const onFinish = async (values: IProduct) => {
         const valuesToSend = transformValuesToSend(values);
         try {
             const mutationResult = await mutation.mutateAsync(valuesToSend);
             if (mutationResult) {
                 await queryClient.invalidateQueries(product.name);
+                await queryClient.invalidateQueries(categoryName);
                 notificationFacade.sendSuccessNotification();
             }
         } catch (error) {
