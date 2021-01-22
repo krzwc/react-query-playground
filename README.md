@@ -5,7 +5,7 @@ I decided to build this app in RESTful-API-based SOA with React on the frontend,
 # Personal goals
 
 For this exercise on the frontend I used **React Query** as a caching layer (rather than using any state management library) which has been my first exposure to the library.
-Other than that I wanted to test out React's 17.0.0 novelties and Babel-only build process on the frontend (without the use of `tsc`/`ts-node` for Typescript compilation).
+Other than that I wanted to test out React's 17.0.0 novelties and Babel-only build process on the frontend (without the use of `tsc`/`ts-loader` for Typescript compilation).
 
 # Building via docker-compose
 
