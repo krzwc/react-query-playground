@@ -1,12 +1,3 @@
-# Project description
-
-I decided to build this app in RESTful-API-based SOA with React on the frontend, NodeJS/Express-based backend and MongoDB.
-
-# Personal goals
-
-For this exercise on the frontend I used **React Query** as a caching layer (rather than using any state management library) which has been my first exposure to the library.
-Other than that I wanted to test out React's 17.0.0 novelties and Babel-only build process on the frontend (without the use of `tsc`/`ts-loader` for Typescript compilation).
-
 # Building via docker-compose
 
 1. Prior to the next step please make sure you have `Docker` and `Docker Compose` installed on your local machine (checked on `Docker version 19.03.5, build 633a0ea` and `docker-compose version 1.25.4, build 8d51620a`).
@@ -68,7 +59,3 @@ npm run cypress:start
 ```
 
 in the `frontend` folder.
-
-# Afterword
-
-**Thank you for the opportunity and your time**
