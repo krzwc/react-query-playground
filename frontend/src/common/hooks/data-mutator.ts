@@ -17,8 +17,8 @@ export function useDataMutator<T>(
     entityData?: { id: string },
 ): UseMutationResult<T, Error, T, unknown> {
     const { requestMethod: method, url } = get(MODELS, [entityType, 'actions', actionType], {
-        requestMethod: REQUEST_METHODS.PUT,
-        url: '',
+        requestMethod: REQUEST_METHODS.POST, // fallback method
+        url: '', // fallback URL
     });
 
     const headers = {

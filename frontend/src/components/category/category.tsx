@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactNode } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { QueryStatus } from 'react-query';
-import { PageHeader, Image, Empty as Antdmpty } from 'antd';
+import { PageHeader, Image, Empty as AntdEmpty } from 'antd';
 import { Loader } from 'components/loader';
 import { isNotEmpty } from 'common/helpers';
 import { Empty } from 'components/empty';
@@ -28,7 +28,7 @@ export const Category: FunctionComponent<{
                                     height={200}
                                     src={images[0].url}
                                     preview={false}
-                                    placeholder={Antdmpty.PRESENTED_IMAGE_SIMPLE}
+                                    placeholder={AntdEmpty.PRESENTED_IMAGE_SIMPLE}
                                 />
                             ) : (
                                 <Empty />

@@ -9,6 +9,7 @@ node_modules
 # production
 build*/
 dist
+prodBundleReport.html
 
 # misc
 .DS_Store
