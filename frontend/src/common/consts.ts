@@ -17,7 +17,7 @@ export enum REQUEST_METHODS {
 export const BASE_URL = 'http://0.0.0.0:4000/api';
 
 export const URLS = {
-    DESKTOP_APPS: BASE_URL + '/desktop-apps',
+    DESKTOP_APPS: BASE_URL + `/${ENTITY_TYPES.DESKTOP_APPS}`,
     SINGLE_ITEM: (data: SingleItemData): string => String(data.id),
 };
 

@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ENTITY_TYPES, REQUEST_STATUSES } from 'common/consts';
 import type { IProduct, ICategory } from 'components/interfaces';
 import { useDataProvider } from 'common/hooks';
@@ -7,8 +8,6 @@ import { Empty } from 'components/empty';
 import { Category } from 'components/category';
 import { DesktopAppsProductUpdater } from '../desktop-apps-product';
 import { assertExpectedArrayShape, assertExpectedObjectShape, isProductsArr, isCategoryObj } from '../helpers';
-
-const productComponent = (productName: string) => <DesktopAppsProductUpdater productName={productName} />;
 
 export const DesktopApps: FunctionComponent = () => {
     const { status, data } = useDataProvider<{ category: ICategory; products: IProduct[] }>(ENTITY_TYPES.DESKTOP_APPS);
@@ -25,12 +24,14 @@ export const DesktopApps: FunctionComponent = () => {
     }
 
     return data ? (
-        <Category
-            status={status}
-            products={data.products}
-            category={data.category}
-            productComponent={productComponent}
-        />
+        <Router>
+            <Category
+                status={status}
+                products={data.products}
+                category={data.category}
+                productComponent={<DesktopAppsProductUpdater />}
+            />
+        </Router>
     ) : (
         <Empty requestFailure={false} />
     );

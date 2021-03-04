@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { QueryStatus } from 'react-query';
 import { PageHeader, Image, Empty as AntdEmpty } from 'antd';
 import { Loader } from 'components/loader';
@@ -13,9 +13,9 @@ export const Category: FunctionComponent<{
     category: ICategory;
     products: IProduct[];
     status: QueryStatus;
-    productComponent: (productName: string) => ReactNode;
+    productComponent: ReactNode;
 }> = ({ category: { name: categoryName, slug: categorySlug }, products = [], status, productComponent }) => (
-    <Router>
+    <>
         <Container>
             <PageHeader title={categoryName} />
             <Grid>
@@ -43,12 +43,7 @@ export const Category: FunctionComponent<{
             </Grid>
         </Container>
         <Switch>
-            {isNotEmpty(products) &&
-                products.map(({ name: productName, slug: productSlug }) => (
-                    <Route path={`/${categorySlug}/${productSlug}`} key={productName}>
-                        {productComponent(productName)}
-                    </Route>
-                ))}
+            <Route path={`/${categorySlug}/:slug`}>{productComponent}</Route>
         </Switch>
-    </Router>
+    </>
 );
