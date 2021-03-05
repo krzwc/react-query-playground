@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { ByRoleOptions, fireEvent, render, waitFor, within, act } from '@testing-library/react';
 import { CustomRender, GetByRoleWithTextContent } from '../globals';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 
 global.render = render;
 global.fireEvent = fireEvent;

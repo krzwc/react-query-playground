@@ -14,13 +14,13 @@
         "________________________________Project cleaning____________________________": "",
         "format": "prettier --write \"**/*.{js,ts,tsx}\"",
         "clean": "rm -rf dist prodBundleReport.html",
-        "clean:all": "npm run clean && rm -rf node_modules",
+        "clean:all": "yarn run clean && rm -rf node_modules",
         "________________________________Project testing_____________________________": "",
         "test": "jest --config=./config/jest/jest.config.ts",
-        "test:watch": "npm run test -- --watch",
+        "test:watch": "yarn run test -- --watch",
         "cypress:open": "cypress open",
         "cypress:run": "cypress run",
-        "cypress:run:spec": "npm run cypress:run -- --headless --spec \"cypress/integration/sample_spec.ts\"",
+        "cypress:run:spec": "yarn run cypress:run -- --headless --spec \"cypress/integration/sample_spec.ts\"",
         "cypress:start": "start-server-and-test start:test http://localhost:3000 cypress:run:spec"
     },
     "devDependencies": {
