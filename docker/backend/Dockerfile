@@ -1,8 +1,8 @@
 FROM node:14-alpine
 RUN mkdir -p /app
 WORKDIR /app
-COPY ./frontend/package.json ./
-COPY ./frontend/yarn.lock ./
+COPY ./packages/backend/package.json ./
+COPY ./packages/backend/yarn.lock ./
 RUN yarn install
-COPY ./backend .
+COPY ./packages/backend .
 CMD [ "yarn", "start" ]

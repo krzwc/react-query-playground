@@ -1,7 +1,7 @@
 /* eslint-disable */
 module.exports = {
     clearMocks: true,
-    moduleDirectories: ['<rootDir>../node_modules'],
+    moduleDirectories: ['<rootDir>../../../node_modules'],
     moduleFileExtensions: ['js', 'ts', 'tsx'],
     rootDir: '../../src',
     transform: { '\\.[jt]sx?$': 'babel-jest' },

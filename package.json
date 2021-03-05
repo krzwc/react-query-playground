@@ -1,0 +1,21 @@
+{
+  "name": "monorepo",
+  "version": "1.0.0",
+  "description": "React query playground",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "lerna run --parallel start",
+    "lerna-bootstrap": "lerna bootstrap",
+    "test": "lerna run test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}

@@ -1,4 +1,5 @@
 import { Category } from './category';
+import { BrowserRouter } from 'react-router-dom';
 import { REQUEST_STATUSES } from 'common/consts';
 import type { ICategory, IProduct } from '../interfaces';
 
@@ -11,12 +12,14 @@ const mockedProductComponent = (productName: string) => <>{productName}</>;
 describe('Category', () => {
     it('renders properly links on provided props', () => {
         const { queryAllByRole } = render(
-            <Category
-                category={category.category}
-                products={category.products}
-                status={REQUEST_STATUSES.SUCCESS}
-                productComponent={mockedProductComponent}
-            />,
+            <BrowserRouter>
+                <Category
+                    category={category.category}
+                    products={category.products}
+                    status={REQUEST_STATUSES.SUCCESS}
+                    productComponent={mockedProductComponent}
+                />
+            </BrowserRouter>,
         );
         expect(queryAllByRole('link')).toHaveLength(3);
     });
