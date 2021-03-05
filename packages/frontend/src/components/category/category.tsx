@@ -43,7 +43,15 @@ export const Category: FunctionComponent<{
             </Grid>
         </Container>
         <Switch>
-            <Route path={`/${categorySlug}/:slug`}>{productComponent}</Route>
+            <Route
+                path={`/${categorySlug}/:slug`}
+                render={(props) => {
+                    if (props.match.params.slug && products.some(({ slug }) => slug === props.match.params.slug)) {
+                        return productComponent;
+                    }
+                    return <Empty />;
+                }}
+            />
         </Switch>
     </>
 );
