@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { QueryStatus } from 'react-query';
 import { PageHeader, Image, Empty as AntdEmpty } from 'antd';
 import { Loader } from 'components/loader';
@@ -49,7 +49,7 @@ export const Category: FunctionComponent<{
                     if (props.match.params.slug && products.some(({ slug }) => slug === props.match.params.slug)) {
                         return productComponent;
                     }
-                    return <Empty />;
+                    return <Redirect to="/" />;
                 }}
             />
         </Switch>
