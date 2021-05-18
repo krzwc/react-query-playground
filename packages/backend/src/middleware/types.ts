@@ -1,4 +1,3 @@
-export type Error = {
+export interface RequestError extends Error {
   status?: number;
-  message?: string;
-};
+}

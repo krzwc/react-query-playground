@@ -1,10 +1,14 @@
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import Category from '../models/category';
 import Product from '../models/product';
 import { check, validationResult } from 'express-validator';
+import type { ControllerResponse } from './types';
 
 export default {
-  async findAll(req: Request, res: Response) {
+  async findAll(
+    req: Request,
+    res: Response,
+  ): Promise<ControllerResponse> {
     try {
       const categories = await Category.find().sort({ name: 'desc' });
       const products = await Product.find();
@@ -14,9 +18,12 @@ export default {
       console.error(e);
       res.status(400).end();
     }
-    return;
   },
-  async findOne(req: Request, res: Response, next: NextFunction) {
+  async findOne(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<ControllerResponse> {
     try {
       const category = await Category.findOne({
         slug: req.params.slug,
@@ -32,7 +39,11 @@ export default {
       res.status(400).end();
     }
   },
-  async update(req: Request, res: Response, next: NextFunction) {
+  async update(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<ControllerResponse> {
     try {
       const category = await Category.findOneAndUpdate(
         { slug: req.params.slug },
@@ -50,7 +61,11 @@ export default {
     }
   },
   validate: [check('name').isLength({ min: 1 })],
-  verifyValidation(req: Request, res: Response, next: NextFunction) {
+  verifyValidation(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): ControllerResponse {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {

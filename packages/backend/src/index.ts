@@ -17,7 +17,7 @@ app.use('/api', routes());
 app.use(handle404);
 app.use(catchErrors);
 
-export const start = async () => {
+export const start = async (): Promise<void> => {
   try {
     await startDB();
     app.listen(config.server.port, () => {

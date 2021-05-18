@@ -5,7 +5,7 @@ import { populateDB } from './populate-db';
 
 const eraseDatabaseOnSync = true;
 
-export const startDB = (url = config.database) => {
+export const startDB = (url = config.database): Promise<void> => {
   return mongoose
     .connect(url, {
       useCreateIndex: true,

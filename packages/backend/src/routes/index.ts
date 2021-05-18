@@ -3,7 +3,7 @@ import categoryController from '../controllers/category-controller';
 import productController from '../controllers/product-controller';
 import { catchAsyncDecorator } from '../middleware/error-handlers';
 
-const routes = () => {
+const routes = (): Router => {
   const api: Router = Router();
   //GET all
   api.get('/', catchAsyncDecorator(categoryController.findAll));

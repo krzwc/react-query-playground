@@ -1,6 +1,6 @@
 import models from '../models';
 
-export const populateDB = async () => {
+export const populateDB = async (): Promise<void> => {
   try {
     const category = new models.Category({
       name: 'Desktop Apps',

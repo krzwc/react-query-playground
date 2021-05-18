@@ -1,7 +1,5 @@
 import * as mongoose from 'mongoose';
-// @ts-ignore-start
 import * as slug from 'mongoose-slug-updater';
-// @ts-ignore-end
 import type { ProductModel } from './types';
 
 mongoose.plugin(slug);

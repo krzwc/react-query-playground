@@ -1,31 +1,40 @@
-import { Request, Response, NextFunction } from 'express';
-import { Error } from './types';
+import type {
+  Request,
+  Response,
+  NextFunction,
+  ErrorRequestHandler,
+} from 'express';
+import type { RequestError } from './types';
+import type { ControllerResponse } from '../controllers/types';
 
 export const catchAsyncDecorator = (
   fn: (
     req: Request,
     res: Response,
     next: NextFunction,
-  ) => Promise<any>,
-) => (req: Request, res: Response, next: NextFunction) =>
-  fn(req, res, next).catch((err: Error) => next(err));
+  ) => Promise<ControllerResponse>,
+) => (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<ControllerResponse> =>
+  fn(req, res, next).catch((err: ErrorRequestHandler) => next(err));
 
 export const handle404 = (
   req: Request,
   res: Response,
   next: NextFunction,
-) => {
-  const err: Error = new Error('404 page not found');
+): void => {
+  const err: RequestError = new Error('404 page not found');
   err.status = 404;
   next(err);
 };
 
 export const catchErrors = (
-  err: Error,
+  err: RequestError,
   req: Request,
   res: Response,
-  next: NextFunction,
-) => {
+): void => {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
